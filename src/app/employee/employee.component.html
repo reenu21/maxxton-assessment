@@ -1,0 +1,76 @@
+<div class="content-width mt-5">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col">
+        <input type="text" (keyup)="applyFilters()" class="form-control" placeholder="Search Employee By Name"
+          [(ngModel)]="searchText">
+      </div>
+      <div class="col">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="moreThan2Years" [checked]="moreThanTwoYears"
+            (change)="toggleExperience()">
+          <label class="form-check-label" for="moreThan2Years">
+            Experience more Than 2 years
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="nonDevelopment" [checked]="nonDevelopment"
+            (change)="toggleDepartment()">
+          <label class="form-check-label" for="nonDevelopment">
+            Exclude Development Department
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-9">
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">
+                NAME
+                <i class="fa fa-long-arrow-down cursor-pointer" aria-hidden="true" (click)="sortEmployeesByNameAsec()"
+                  *ngIf="showSortByNameAsec"></i>
+                <i class="fa fa-long-arrow-up cursor-pointer pl-1" aria-hidden="true"
+                  (click)="sortEmployeesByNameDsec()" *ngIf="showSortByNameDsec"></i>
+              </th>
+              <th scope="col">
+                DEPARTMENT
+              </th>
+              <th scope="col">
+               JOINING DATE
+                <i class="fa fa-long-arrow-down cursor-pointer" aria-hidden="true" (click)="sortEmployeesByJoiningDateAsec()"
+                *ngIf="showSortByJoiningDateAsec"></i>
+              <i class="fa fa-long-arrow-up cursor-pointer pl-1" aria-hidden="true"
+                (click)="sortEmployeesByJoiningDateDsec()" *ngIf="showSortByJoiningDateDsec"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of filteredEmployees">
+              <th scope="row"> {{employee.id}}</th>
+              <td> {{employee.name}}</td>
+              <td>{{employee.department}}</td>
+              <td>{{employee.joiningDate}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-3">
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center list-group-item-dark font-white">
+           DEPARTMENT DETAILS
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let department of departmentWithCount">
+            {{department.name}}
+            <span class="badge bg-dark rounded-pill font-white">{{department.count}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</div>
